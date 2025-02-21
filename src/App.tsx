@@ -7,7 +7,7 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Header/>
+      <Header />
       <Outlet />
     </QueryClientProvider>
   )

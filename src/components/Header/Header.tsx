@@ -1,7 +1,10 @@
+import useUserStore from '@/stores/userStore'
+
 import LogoButton from '@/components/Header/Buttons/LogoButton'
 import LoginButton from '@/components/Header/Buttons/LoginButton'
 import ProfileButton from '@/components/Header/Buttons/ProfileButton'
-import useUserStore from '@/stores/userStore'
+import AlarmButton from '@/components/Header/Buttons/AlarmButton'
+import PostButton from '@/components/Header/Buttons/PostButton'
 
 const Header: React.FC = () => {
   const {isLoggedIn} = useUserStore()
@@ -10,7 +13,9 @@ const Header: React.FC = () => {
     <header className="w-full py-4 px-6 flex justify-between items-center">
       <LogoButton />
 
-      <div className="flex space-x-2">
+      <div className="flex gap-x-1">
+        <AlarmButton />
+        <PostButton />
         {isLoggedIn ? <ProfileButton /> : <LoginButton />}
       </div>
     </header>
