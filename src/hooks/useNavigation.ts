@@ -5,7 +5,8 @@ const useNavigation = () => {
 
   return {
     goToMain: () => navigate('/'),
-    goToProfile: () => navigate('/profile')
+    goToProfile: () => navigate('/profile'),
+    goToLogin: () => navigate('/login'),
   }
 }
 
