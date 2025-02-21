@@ -3,6 +3,7 @@ import App from '@/App'
 import MainPage from '@/pages/MainPage'
 import ProfilePage from '@/pages/ProfilePage';
 import LoginPage from '@/pages/LoginPage'
+import PostPage from '@/pages/PostPage'
 
 const router = createBrowserRouter([
   {
@@ -15,11 +16,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <ProfilePage />
+        element: <ProfilePage />,
       },
       {
         path: '/login',
-        element: <LoginPage />
+        element: <LoginPage />,
+      },
+      {
+        path: '/post',
+        element: <PostPage />,
       },
     ],
   },
