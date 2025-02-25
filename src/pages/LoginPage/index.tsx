@@ -1,6 +1,10 @@
 const Profile = () => {
   return (
-    <h1>Login Page</h1>
+    <div className="flex items-center justify-center pt-40">
+      <p className="text-5xl">
+        Login Page
+      </p>
+    </div>
   )
 }
 

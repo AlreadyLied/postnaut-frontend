@@ -34,7 +34,7 @@ const PostCarousel = () => {
 
         <button
           onClick={nextPost}
-          className="mt-1 p-3 w-32 bg-green-500 text-white rounded-lg shadow-md"
+          className="mt-1 p-3 w-32 bg-gray-500 text-white rounded-lg shadow-md"
         >
           Next
         </button>
