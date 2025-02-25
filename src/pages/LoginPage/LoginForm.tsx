@@ -15,7 +15,7 @@ const LoginForm = () => {
     
   return (
     <div className="flex justify-center items-center mt-24">
-      <form onSubmit={handleSubmit} className="p-6 border rounded-lg shadow-md">
+      <form onSubmit={handleSubmit} className="p-6 w-96 border rounded-lg shadow-md">
         <h2 className="text-xl font-bold mb-4">Login</h2>
         <div className="mb-4">
           <label className="block mb-1">Email</label>
@@ -24,6 +24,7 @@ const LoginForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-2 border rounded"
+            placeholder="example@email.com"
             required
           />
         </div>
@@ -34,6 +35,7 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 border rounded"
+            placeholder="4-16 characters long"
             required
           />
         </div>
