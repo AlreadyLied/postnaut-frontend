@@ -14,8 +14,8 @@ const Header: React.FC = () => {
       <LogoButton />
 
       <div className="flex gap-x-1">
-        <AlarmButton />
-        <PostButton />
+        {isLoggedIn ? <AlarmButton /> : <div/>}
+        {isLoggedIn ? <PostButton /> : <div/>}
         {isLoggedIn ? <ProfileButton /> : <LoginButton />}
       </div>
     </header>

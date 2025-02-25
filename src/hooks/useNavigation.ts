@@ -7,6 +7,7 @@ const useNavigation = () => {
     goToMain: () => navigate('/'),
     goToProfile: () => navigate('/profile'),
     goToLogin: () => navigate('/login'),
+    goToRegister: () => navigate('/register'),
     goToPost: () => navigate('/post'),
   }
 }

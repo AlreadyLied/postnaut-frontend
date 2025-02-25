@@ -1,11 +1,17 @@
-const Profile = () => {
+import LoginForm from '@/pages/LoginPage/LoginForm'
+import useNavigation from '@/hooks/useNavigation'
+
+const Login = () => {
+  const {goToRegister} = useNavigation()
+
   return (
-    <div className="flex items-center justify-center pt-40">
-      <p className="text-5xl">
-        Login Page
-      </p>
+    <div className="flex flex-col items-center justify-center">
+      <LoginForm />
+      <button onClick={goToRegister}>
+        Register now!
+      </button>
     </div>
   )
 }
 
-export default Profile
+export default Login
