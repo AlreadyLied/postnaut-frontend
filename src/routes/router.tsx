@@ -1,10 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
+
 import App from '@/App'
-import MainPage from '@/pages/MainPage'
-import DashboardPage from '@/pages/DashboardPage';
-import LoginPage from '@/pages/LoginPage'
-import RegisterPage from '@/pages/RegisterPage'
-import PostPage from '@/pages/PostPage'
+import MainPage from '@/pages/Main'
+import LoginPage from '@/pages/Login'
+import RegisterPage from '@/pages/Register'
+import NewPostPage from '@/pages/NewPost'
+import StatsPage from '@/pages/Stats'
+import PostsPage from '@/pages/Posts'
+import ArchivePage from '@/pages/Archive'
+import CommentsPage from '@/pages/Comments'
 
 const router = createBrowserRouter([
   {
@@ -16,20 +20,32 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: '/Dashboard',
-        element: <DashboardPage />,
-      },
-      {
-        path: '/login',
+        path: 'login',
         element: <LoginPage />,
       },
       {
-        path: '/register',
+        path: 'register',
         element: <RegisterPage />,
       },
       {
-        path: '/post',
-        element: <PostPage />,
+        path: 'new-post',
+        element: <NewPostPage />,
+      },
+      {
+        path: 'stats',
+        element: <StatsPage />,
+      },
+      {
+        path: 'posts',
+        element: <PostsPage />,
+      },
+      {
+        path: 'archive',
+        element: <ArchivePage />,
+      },
+      {
+        path: 'comments',
+        element: <CommentsPage />,
       },
     ],
   },

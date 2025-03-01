@@ -1,4 +1,4 @@
-import PostCarousel from '@/pages/MainPage/PostCarousel'
+import PostCarousel from '@/pages/Main/PostCarousel'
 
 const Main = () => {
   return (

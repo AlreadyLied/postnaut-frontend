@@ -5,10 +5,13 @@ const useNavigation = () => {
 
   return {
     goToMain: () => navigate('/'),
-    goToProfile: () => navigate('/dashboard'),
     goToLogin: () => navigate('/login'),
     goToRegister: () => navigate('/register'),
-    goToPost: () => navigate('/post'),
+    goToNewPost: () => navigate('/new-post'),
+    goToStats: () => navigate('/stats'),
+    goToPosts: () => navigate('/posts'),
+    goToArchive: () => navigate('/archive'),
+    goToComments: () => navigate('comments'),
   }
 }
 

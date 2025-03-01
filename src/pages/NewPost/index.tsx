@@ -1,11 +1,11 @@
-const Post = () => {
+const NewPost = () => {
   return (
     <div className="flex items-center justify-center pt-40">
       <p className="text-5xl">
-        Post Page
+        Add New Post Here
       </p>
     </div>
   )
 }
 
-export default Post
+export default NewPost

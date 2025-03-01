@@ -1,4 +1,4 @@
-import LoginForm from '@/pages/LoginPage/LoginForm'
+import LoginForm from '@/pages/Login/LoginForm'
 import useNavigation from '@/hooks/useNavigation'
 
 const Login = () => {
