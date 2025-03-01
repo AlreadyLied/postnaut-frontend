@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App'
 import MainPage from '@/pages/MainPage'
-import ProfilePage from '@/pages/ProfilePage';
+import DashboardPage from '@/pages/DashboardPage';
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
 import PostPage from '@/pages/PostPage'
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: '/profile',
-        element: <ProfilePage />,
+        path: '/Dashboard',
+        element: <DashboardPage />,
       },
       {
         path: '/login',
