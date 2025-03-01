@@ -11,7 +11,7 @@ const useNavigation = () => {
     goToStats: () => navigate('/stats'),
     goToPosts: () => navigate('/posts'),
     goToArchive: () => navigate('/archive'),
-    goToComments: () => navigate('comments'),
+    goToComments: () => navigate('/comments'),
   }
 }
 
