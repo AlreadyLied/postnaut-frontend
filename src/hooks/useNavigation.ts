@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const useNavigation = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   return {
     goToMain: () => navigate('/'),
@@ -12,6 +13,7 @@ const useNavigation = () => {
     goToPosts: () => navigate('/posts'),
     goToArchive: () => navigate('/archive'),
     goToComments: () => navigate('/comments'),
+    currentPath: location.pathname,
   }
 }
 

@@ -1,7 +1,8 @@
 import useNavigation from '@/hooks/useNavigation'
+import SidebarButton from '@/components/SidebarButton'
 
 const SideBar = () => {
-  const { goToStats, goToPosts, goToArchive, goToComments } = useNavigation()
+  const { goToStats, goToPosts, goToArchive, goToComments, currentPath } = useNavigation()
 
   const handleLogout = () => {
     /* TODO: logout logic */
@@ -11,18 +12,11 @@ const SideBar = () => {
   return (
     <div className="w-48 h-full p-5 flex flex-col">
       <div className="flex flex-col gap-4 pt-10">
-        <button className="hover:bg-gray-200 p-2 rounded" onClick={goToStats}>
-          Stats
-        </button>
-        <button className="hover:bg-gray-200 p-2 rounded" onClick={goToPosts}>
-          Posts
-        </button>
-        <button className="hover:bg-gray-200 p-2 rounded" onClick={goToArchive}>
-          Archive
-        </button>
-        <button className="hover:bg-gray-200 p-2 rounded" onClick={goToComments}>
-          Comments
-        </button>
+        <SidebarButton label="Stats" onClick={goToStats} path="/stats" currentPath={currentPath} />
+        <SidebarButton label="Posts" onClick={goToPosts} path="/posts" currentPath={currentPath} />
+        <SidebarButton label="Archive" onClick={goToArchive} path="/archive" currentPath={currentPath} />
+        <SidebarButton label="Comments" onClick={goToComments} path="/comments" currentPath={currentPath} />
+        
         <button className="hover:bg-gray-200 p-1 mt-36 rounded" onClick={handleLogout}>
           Log Out
         </button>
