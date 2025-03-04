@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [inputPassword, setInputPassword] = useState("")
   
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
       const response = await fetch("http://localhost:8080/auth/login", {

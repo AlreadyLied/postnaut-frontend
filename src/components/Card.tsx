@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 
 interface CardProps {
-  title: string;
-  content: string;
-  animationKey: number;
-  direction: number;
+  title: string
+  content: string
+  animationKey: number
+  direction: number
 }
 
 const Card: React.FC<CardProps> = ({ title, content, animationKey, direction }) => {
@@ -30,7 +30,7 @@ const Card: React.FC<CardProps> = ({ title, content, animationKey, direction }) 
         </div>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

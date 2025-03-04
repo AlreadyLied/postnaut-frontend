@@ -1,12 +1,12 @@
-import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence } from "framer-motion"
+import { useState } from "react"
 import Card from '@/components/Card'
 
 const posts = [
   { id: 1, title: "Post 1", content: "This is the first post" },
   { id: 2, title: "Post 2", content: "Here's another interesting post" },
   { id: 3, title: "Post 3", content: "More content to explore!" },
-];
+]
 
 const PostCarousel = () => {
   const [index, setIndex] = useState(0)
