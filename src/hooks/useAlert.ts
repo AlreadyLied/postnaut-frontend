@@ -46,11 +46,24 @@ const useAlert = () => {
     })
   }
 
+  const showLogout = () => {
+    return Swal.fire({
+      icon: 'success',
+      title: "Logout",
+      confirmButtonText: "Go To Main",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goToMain()
+      }
+    })
+  }
+
   return {
     showLoginSuccess,
     showRegisterSuccess,
     showLoginFail,
     showRegisterFail,
+    showLogout,
   }
 }
 

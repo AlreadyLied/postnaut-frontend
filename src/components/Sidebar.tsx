@@ -1,14 +1,17 @@
 import useNavigation from '@/hooks/useNavigation'
-import SidebarButton from '@/components/SidebarButton'
 import useUserStore from '@/stores/userStore'
+import useAlert from '@/hooks/useAlert'
+
+import SidebarButton from '@/components/SidebarButton'
 
 const SideBar = () => {
-  const { goToMain, goToStats, goToPosts, goToArchive, goToComments, currentPath } = useNavigation()
+  const { goToStats, goToPosts, goToArchive, goToComments, currentPath } = useNavigation()
   const { logout } = useUserStore()
+  const { showLogout } = useAlert()
 
   const handleLogout = () => {
     logout()
-    goToMain()
+    showLogout()
   }
 
   return (
