@@ -5,7 +5,9 @@ const LogoButton = () => {
 
   return (
     <button onClick={goToMain}>
-      <img src="/logo.png" alt="Website Icon" className="w-auto h-20 mr-2" />
+      <p className="w-20 h-20 p-2">
+        LOGO
+      </p>
     </button>
   )
 }
