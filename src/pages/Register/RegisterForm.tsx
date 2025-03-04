@@ -1,14 +1,20 @@
 import { useState } from 'react'
-import useNavigation from '@/hooks/useNavigation'
+import useAlert from '@/hooks/useAlert'
 
 const RegisterForm = () => {
-  const { goToLogin } = useNavigation()
+  const { showRegisterSuccess } = useAlert()
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [inputEmail, setInputEmail] = useState("")
+  const [inputPassword, setInputPassword] = useState("")
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+
+    // *DELETE*
+    if (inputEmail === 'admin@naver.com') {
+      showRegisterSuccess()
+      return
+    }
 
     try {
       const response = await fetch("http://localhost:8080/auth/register", {
@@ -17,20 +23,19 @@ const RegisterForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email: inputEmail,
+          password: inputPassword,
         }),
       })
 
       // throw error codes
 
-      const data = await response.json()
-      console.log("Register:", data)
+      await response.json()
+      showRegisterSuccess()
+
     } catch (error) {
       console.log("Error:", error)
     }
-    
-    goToLogin()
   }
 
   return (
@@ -41,8 +46,8 @@ const RegisterForm = () => {
           <label className="block mb-1">Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={inputEmail}
+            onChange={(e) => setInputEmail(e.target.value)}
             className="w-full p-2 border rounded"
             placeholder="example@email.com"
             required
@@ -52,8 +57,8 @@ const RegisterForm = () => {
           <label className="block mb-1">Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={inputPassword}
+            onChange={(e) => setInputPassword(e.target.value)}
             className="w-full p-2 border rounded"
             placeholder="4-16 characters long"
             required

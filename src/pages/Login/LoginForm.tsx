@@ -1,16 +1,23 @@
 import { useState } from 'react'
-import useNavigation from '@/hooks/useNavigation'
 import useUserStore from '@/stores/userStore'
+import useAlert from '@/hooks/useAlert'
 
 const LoginForm = () => {
-  const { goToMain } = useNavigation()
   const { login } = useUserStore()
+  const { showLoginSuccess } = useAlert()
 
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
   
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+
+    // *DELETE*
+    if (inputEmail === "admin@naver.com") {
+      login(inputEmail, "ASD")
+      showLoginSuccess()
+      return
+    }
 
     try {
       const response = await fetch("http://localhost:8080/auth/login", {
@@ -28,7 +35,8 @@ const LoginForm = () => {
 
       const jwt = await response.text
       login(inputEmail, jwt.toString())
-      goToMain()
+      showLoginSuccess()
+
     } catch (error) {
       console.log(error)
     }
