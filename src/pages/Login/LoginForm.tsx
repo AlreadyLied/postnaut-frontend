@@ -7,9 +7,31 @@ const LoginForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Email:", email, "Password:", password);
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error("Invalid username or password")
+      }
+
+      const data = await response.json()
+      console.log("Login:", data)
+    } catch (error) {
+      console.log("Error:", error)
+    }
+
     goToMain()
   }
     
