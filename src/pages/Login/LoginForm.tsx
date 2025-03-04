@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import useNavigation from '@/hooks/useNavigation'
+import useUserStore from '@/stores/userStore'
 
 const LoginForm = () => {
   const { goToMain } = useNavigation()
+  const { login } = useUserStore()
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [inputEmail, setInputEmail] = useState("")
+  const [inputPassword, setInputPassword] = useState("")
   
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -17,8 +19,8 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email: inputEmail,
+          password: inputPassword,
         })
       })
 
@@ -27,12 +29,11 @@ const LoginForm = () => {
       }
 
       const data = await response.json()
-      console.log("Login:", data)
+      login(inputEmail, data.token)
+      goToMain()
     } catch (error) {
-      console.log("Error:", error)
+      console.log(error)
     }
-
-    goToMain()
   }
     
   return (
@@ -43,8 +44,8 @@ const LoginForm = () => {
           <label className="block mb-1">Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={inputEmail}
+            onChange={(e) => setInputEmail(e.target.value)}
             className="w-full p-2 border rounded"
             placeholder="example@email.com"
             required
@@ -54,8 +55,8 @@ const LoginForm = () => {
           <label className="block mb-1">Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={inputPassword}
+            onChange={(e) => setInputPassword(e.target.value)}
             className="w-full p-2 border rounded"
             placeholder="4-16 characters long"
             required
