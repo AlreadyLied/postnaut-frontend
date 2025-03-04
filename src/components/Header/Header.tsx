@@ -7,7 +7,7 @@ import AlarmButton from '@/components/Header/Buttons/AlarmButton'
 import PostButton from '@/components/Header/Buttons/PostButton'
 
 const Header: React.FC = () => {
-  const {isLoggedIn} = useUserStore()
+  const { isLoggedIn } = useUserStore()
 
   return (
     <header className="w-full py-4 px-6 flex justify-between items-center">

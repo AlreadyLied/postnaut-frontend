@@ -19,7 +19,7 @@ const RegisterForm = () => {
         body: JSON.stringify({
           email: email,
           password: password,
-        })
+        }),
       })
 
       // throw error codes

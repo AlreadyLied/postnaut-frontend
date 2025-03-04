@@ -2,7 +2,7 @@ import LoginForm from '@/pages/Login/LoginForm'
 import useNavigation from '@/hooks/useNavigation'
 
 const Login = () => {
-  const {goToRegister} = useNavigation()
+  const { goToRegister } = useNavigation()
 
   return (
     <div className="flex flex-col items-center justify-center">
