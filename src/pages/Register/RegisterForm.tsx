@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 import useNavigation from '@/hooks/useNavigation'
 
 const RegisterForm = () => {
