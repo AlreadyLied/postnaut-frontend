@@ -2,7 +2,7 @@ import { useState } from 'react'
 import useAlert from '@/hooks/useAlert'
 
 const RegisterForm = () => {
-  const { showRegisterSuccess } = useAlert()
+  const { showRegisterSuccess, showRegisterFail } = useAlert()
 
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
@@ -27,14 +27,18 @@ const RegisterForm = () => {
           password: inputPassword,
         }),
       })
-
-      // throw error codes
-
-      await response.json()
-      showRegisterSuccess()
-
+      
+      if (response.status === 201) {
+        await response.json()
+        showRegisterSuccess()
+      } else if (response.status === 409) {
+        showRegisterFail("The email already exists")
+        throw new Error("Conflict: Existing email")
+      } else {
+        throw new Error(`Unexpected error: ${response.status}`)
+      }
     } catch (error) {
-      console.log("Error:", error)
+      console.log(error)
     }
   }
 

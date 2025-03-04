@@ -4,7 +4,7 @@ import useAlert from '@/hooks/useAlert'
 
 const LoginForm = () => {
   const { login } = useUserStore()
-  const { showLoginSuccess } = useAlert()
+  const { showLoginSuccess, showLoginFail } = useAlert()
 
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
@@ -31,12 +31,16 @@ const LoginForm = () => {
         })
       })
 
-      // throw error codes
-
-      const jwt = await response.text
-      login(inputEmail, jwt.toString())
-      showLoginSuccess()
-
+      if (response.status === 200) {
+        const jwt = await response.text()
+        login(inputEmail, jwt.toString())
+        showLoginSuccess()
+      } else if (response.status === 401) {
+        showLoginFail("Incorrect email or password")
+        throw new Error("Unauthorized: Incorrect email or password")
+      } else {
+        throw new Error(`Unexpected error: ${response.status}`)
+      }
     } catch (error) {
       console.log(error)
     }
