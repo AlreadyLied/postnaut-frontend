@@ -28,8 +28,8 @@ const LoginForm = () => {
         throw new Error("Invalid username or password")
       }
 
-      const data = await response.json()
-      login(inputEmail, data.token)
+      const jwt = await response.text
+      login(inputEmail, jwt.toString())
       goToMain()
     } catch (error) {
       console.log(error)

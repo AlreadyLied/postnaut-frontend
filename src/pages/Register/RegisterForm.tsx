@@ -8,7 +8,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("")
 
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
       const response = await fetch("http://localhost:8080/auth/register", {
