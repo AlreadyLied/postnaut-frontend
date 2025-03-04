@@ -22,9 +22,7 @@ const RegisterForm = () => {
         })
       })
 
-      if (!response.ok) {
-        throw new Error("Invalid username or password")
-      }
+      // throw error codes
 
       const data = await response.json()
       console.log("Register:", data)

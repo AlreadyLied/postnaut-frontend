@@ -24,9 +24,7 @@ const LoginForm = () => {
         })
       })
 
-      if (!response.ok) {
-        throw new Error("Invalid username or password")
-      }
+      // throw error codes
 
       const jwt = await response.text
       login(inputEmail, jwt.toString())
