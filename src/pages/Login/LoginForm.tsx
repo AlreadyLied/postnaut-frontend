@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import useUserStore from '@/stores/userStore'
 import useAlert from '@/hooks/useAlert'
+import authService from '@/services/authService'
 
 const LoginForm = () => {
   const { login } = useUserStore()
@@ -20,29 +21,15 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: inputEmail,
-          password: inputPassword,
-        })
-      })
-
-      if (response.status === 200) {
-        const jwt = await response.text()
-        login(inputEmail, jwt.toString())
-        showLoginSuccess()
-      } else if (response.status === 401) {
-        showLoginFail("Incorrect email or password")
-        throw new Error("Unauthorized: Incorrect email or password")
-      } else {
-        throw new Error(`Unexpected error: ${response.status}`)
-      }
+      const jwt = await authService.login(inputEmail, inputPassword)
+      login(inputEmail, jwt.toString())
+      showLoginSuccess()
     } catch (error) {
-      console.log(error)
+      if (error instanceof Error) {
+        showLoginFail(error.message)
+      } else {
+        showLoginFail("Unknown error occurred")
+      }
     }
   }
     

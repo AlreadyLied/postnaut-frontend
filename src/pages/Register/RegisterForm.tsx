@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useAlert from '@/hooks/useAlert'
+import authService from '@/services/authService'
 
 const RegisterForm = () => {
   const { showRegisterSuccess, showRegisterFail } = useAlert()
@@ -17,28 +18,14 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: inputEmail,
-          password: inputPassword,
-        }),
-      })
-      
-      if (response.status === 201) {
-        await response.json()
-        showRegisterSuccess()
-      } else if (response.status === 409) {
-        showRegisterFail("The email already exists")
-        throw new Error("Conflict: Existing email")
-      } else {
-        throw new Error(`Unexpected error: ${response.status}`)
-      }
+      await authService.register(inputEmail, inputPassword)
+      showRegisterSuccess()
     } catch (error) {
-      console.log(error)
+      if (error instanceof Error) {
+        showRegisterFail(error.message)
+      } else {
+        showRegisterFail("Unknown error occurred")
+      }
     }
   }
 
