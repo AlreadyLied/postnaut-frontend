@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import postService from '@/services/postService'
 
 const PostUploader: React.FC = () => {
   const [title, setTitle] = useState<string>('')
@@ -9,32 +10,22 @@ const PostUploader: React.FC = () => {
     event.preventDefault()
 
     if (!content) {
-      // TODO alert content is required
+      // TODO alert "must fill in content"
       return
     }
     
     setIsSending(true);
     
     try {
-      // TODO url
-      const response = await fetch("http://localhost:8080/new-post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // TODO fill body
-        }),
-      })
-      
-      if (response.status == 200) {
-        // TODO post uploaded alert
-        setTitle('')
-        setContent('')
-      } else {
-        throw new Error(`Unexpected error: ${response.status}`)
-      }
+      await postService.newPost(title, content)
+      setTitle('')
+      setContent('')
     } catch (error) {
+      if (error instanceof Error) {
+        // TODO alert (error with reason)
+        console.log(error.message)
+      }
+      // TODO alert (unknown error occurred)
       console.log(error)
     } finally {
       setIsSending(false)
