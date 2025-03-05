@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import postService from '@/services/postService'
+import useAlert from '@/hooks/useAlert'
 
 const PostUploader: React.FC = () => {
+  const { showPostSuccess, showPostFail } = useAlert()
+
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [isSending, setIsSending] = useState<boolean>(false)
@@ -10,7 +13,7 @@ const PostUploader: React.FC = () => {
     event.preventDefault()
 
     if (!content) {
-      // TODO alert "must fill in content"
+      showPostFail("Must fill in the content")
       return
     }
     
@@ -20,13 +23,12 @@ const PostUploader: React.FC = () => {
       await postService.newPost(title, content)
       setTitle('')
       setContent('')
+      showPostSuccess()
     } catch (error) {
       if (error instanceof Error) {
-        // TODO alert (error with reason)
-        console.log(error.message)
+        showPostFail(error.message)
       }
-      // TODO alert (unknown error occurred)
-      console.log(error)
+      showPostFail("Unknown error occurred")
     } finally {
       setIsSending(false)
     }

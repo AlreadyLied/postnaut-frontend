@@ -58,12 +58,31 @@ const useAlert = () => {
     })
   }
 
+  const showPostSuccess = () => {
+    return Swal.fire({
+      icon: 'success',
+      title: "Post Success",
+      confirmButtonText: "OK",
+    })
+  }
+
+  const showPostFail = (message: string) => {
+    return Swal.fire({
+      icon: 'error',
+      title: "Post Failed",
+      text: message,
+      confirmButtonText: "Try Again",
+    })
+  }
+
   return {
     showLoginSuccess,
     showRegisterSuccess,
     showLoginFail,
     showRegisterFail,
     showLogout,
+    showPostSuccess,
+    showPostFail,
   }
 }
 

@@ -8,7 +8,7 @@ const authService = {
       const response = await axios.post(`${API_URL}/login`, {email, password})
 
       if (response.status !== 200) {
-        throw new Error("Login failed")
+        throw new Error()
       }
       return response.data
     } catch (error: unknown) {
@@ -26,12 +26,12 @@ const authService = {
       const response = await axios.post(`${API_URL}/register`, {email, password})
 
       if (response.status !== 201) {
-        throw new Error("Registration failed")
+        throw new Error()
       }
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 409) {
-          throw new Error("Email already exists")
+          throw new Error("The email already exists")
         }
       }
       throw new Error("Unexpected error during register")
