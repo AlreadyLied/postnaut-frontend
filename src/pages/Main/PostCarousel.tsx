@@ -1,16 +1,30 @@
 import { AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import postService from '@/services/postService'
 import Card from '@/components/Card'
-
-const posts = [
-  { id: 1, title: "Post 1", content: "This is the first post" },
-  { id: 2, title: "Post 2", content: "Here's another interesting post" },
-  { id: 3, title: "Post 3", content: "More content to explore!" },
-]
+import { PostWithId } from '@/types/post'
 
 const PostCarousel = () => {
+  const [posts, setPosts] = useState<PostWithId[]>([])
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(1)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const fetchedPosts = await postService.testGetRandomPosts()
+        const postsWithId = fetchedPosts.map((post, idx) => ({
+          id: idx + 1,
+          ...post,
+        }))
+        setPosts(postsWithId)
+      } catch (error) {
+        console.error("Error fetching posts", error)
+      }
+    }
+
+    fetchPosts()
+  }, [])
 
   const nextPost = () => {
     setDirection(1)
@@ -22,13 +36,16 @@ const PostCarousel = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="relative w-120 h-80 flex items-center justify-center">
           <AnimatePresence mode="wait">
-            <Card
+            {posts.length > 0 && (
+              <Card
               key={posts[index].id}
               title={posts[index].title}
               content={posts[index].content}
+              likes={posts[index].likes}
               animationKey={posts[index].id}
               direction={direction}
             />
+            )}
           </AnimatePresence>
         </div>
 

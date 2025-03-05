@@ -1,7 +1,9 @@
-interface Post {
+export interface Post {
   title: string | null
   content: string
   likes: number
 }
 
-export default Post
+export interface PostWithId extends Post {
+  id: number
+}

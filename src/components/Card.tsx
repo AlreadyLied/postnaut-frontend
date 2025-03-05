@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 
 interface CardProps {
-  title: string
+  title: string | null
   content: string
+  likes: number
   animationKey: number
   direction: number
 }
