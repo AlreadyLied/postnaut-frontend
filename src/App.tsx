@@ -1,15 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Outlet } from 'react-router-dom'
-import Header from '@components/Header/Header'
+import Header from '@/components/Header/Header'
 
-const queryClient = new QueryClient()
-
-function App() {
+const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <div>
       <Header />
       <Outlet />
-    </QueryClientProvider>
+    </div>
   )
 }
 

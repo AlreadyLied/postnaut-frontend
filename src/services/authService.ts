@@ -1,11 +1,10 @@
 import axios from 'axios'
-
-const API_URL = "http://localhost:8080/auth"
+import { authAxios } from '@/api/axiosConfig'
 
 const authService = {
   login: async (email: string, password: string): Promise<string> => {
     try {
-      const response = await axios.post(`${API_URL}/login`, {email, password})
+      const response = await authAxios.post(`/auth/login`, {email, password})
 
       if (response.status !== 200) {
         throw new Error()
@@ -23,7 +22,7 @@ const authService = {
 
   register: async (email: string, password: string): Promise<void> => {
     try {
-      const response = await axios.post(`${API_URL}/register`, {email, password})
+      const response = await authAxios.post(`/auth/register`, {email, password})
 
       if (response.status !== 201) {
         throw new Error()

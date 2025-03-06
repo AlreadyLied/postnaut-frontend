@@ -1,7 +1,6 @@
 import axios from 'axios'
+import { postAxios } from '@/api/axiosConfig'
 import { PostDto, PostCard } from '@/types/post'
-
-const API_URL = "http://localhost:8080/posts"
 
 // DELETE
 const testPosts: PostCard[] = [
@@ -20,7 +19,7 @@ const testPosts: PostCard[] = [
 const postService = {
   newPost: async (title: string, content: string): Promise<void> => {
     try {
-      const response = await axios.post(`${API_URL}/add`, {title, content})
+      const response = await postAxios.post('/add', {title, content})
 
       if (response.status !== 201) {
         throw new Error()
@@ -38,7 +37,7 @@ const postService = {
 
   getRandomPosts: async (): Promise<PostCard[]> => {
     try {
-      const response = await axios.get(`${API_URL}/random`)
+      const response = await postAxios.get('/random')
 
       if (response.status !== 200) {
         throw new Error()
