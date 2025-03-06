@@ -12,6 +12,7 @@ const PostCarousel = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        // TEST: change "testGetRandomPosts" to "getRandomPosts"
         const fetchedPosts = await postService.testGetRandomPosts()
         const postsForCard = fetchedPosts.map((post, idx) => ({
           id: idx + 1,
