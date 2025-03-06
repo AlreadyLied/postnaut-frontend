@@ -2,10 +2,10 @@ import { AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import postService from '@/services/postService'
 import Card from '@/components/Card'
-import { PostWithId } from '@/types/post'
+import { PostCardWithId } from '@/types/post'
 
 const PostCarousel = () => {
-  const [posts, setPosts] = useState<PostWithId[]>([])
+  const [posts, setPosts] = useState<PostCardWithId[]>([])
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(1)
 
@@ -13,11 +13,11 @@ const PostCarousel = () => {
     const fetchPosts = async () => {
       try {
         const fetchedPosts = await postService.testGetRandomPosts()
-        const postsWithId = fetchedPosts.map((post, idx) => ({
+        const postsForCard = fetchedPosts.map((post, idx) => ({
           id: idx + 1,
           ...post,
         }))
-        setPosts(postsWithId)
+        setPosts(postsForCard)
       } catch (error) {
         console.error("Error fetching posts", error)
       }
@@ -41,7 +41,7 @@ const PostCarousel = () => {
               key={posts[index].id}
               title={posts[index].title}
               content={posts[index].content}
-              likes={posts[index].likes}
+              likes={posts[index].likeCount}
               animationKey={posts[index].id}
               direction={direction}
             />

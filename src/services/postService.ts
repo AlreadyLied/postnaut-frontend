@@ -1,19 +1,19 @@
 import axios from 'axios'
-import Post from '@/types/post'
+import { PostDto, PostCard } from '@/types/post'
 
 const API_URL = "http://localhost:8080/posts"
 
 // DELETE
-const testPosts: Post[] = [
+const testPosts: PostCard[] = [
   {
     title: null,
     content: "Hello",
-    likes: 1,
+    likeCount: 1,
   },
   {
-    title: null,
+    title: "What",
     content: "Hello2",
-    likes: 2,
+    likeCount: 3,
   },
 ]
 
@@ -36,21 +36,26 @@ const postService = {
     }
   },
 
-  getRandomPosts: async (): Promise<Post[]> => {
+  getRandomPosts: async (): Promise<PostCard[]> => {
     try {
-      // TODO: api
-      const response = await axios.get(`${API_URL}/fill-in`)
+      const response = await axios.get(`${API_URL}/random`)
 
       if (response.status !== 200) {
         throw new Error()
       }
 
-      return response.data as Post[]
+      return response.data.map((post: PostDto) => ({
+        title: post.title,
+        content: post.content,
+        likeCount: post.likeCount,
+      }))
 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === 400) {
-          throw new Error("fill-in")
+        if (error.response?.status === 500) {
+          throw new Error("Internal server error")
+        } else if (error.response?.status === 204) {
+          throw new Error("No content left")
         }
       }
       throw new Error("Unexpected error during fetching random posts")
@@ -58,7 +63,7 @@ const postService = {
   },
 
   // DELETE
-  testGetRandomPosts: async (): Promise<Post[]> => {
+  testGetRandomPosts: async (): Promise<PostCard[]> => {
     return testPosts
   }
 }
