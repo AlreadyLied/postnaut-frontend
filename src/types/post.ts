@@ -8,12 +8,6 @@ export interface PostDto {
   viewCount: number
 }
 
-export interface PostCard {
-  title: string | null
-  content: string
-  likeCount: number
-}
-
-export interface PostCardWithId extends PostCard {
+export interface PostWithId extends PostDto {
   id: number
 }

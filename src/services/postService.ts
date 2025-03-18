@@ -1,22 +1,64 @@
 import axios from 'axios'
 import { postAxios } from '@/api/axiosConfig'
-import { PostDto, PostCard } from '@/types/post'
+import { PostDto } from '@/types/post'
 
 // DELETE
-const testPosts: PostCard[] = [
+const testPosts: PostDto[] = [
   {
+    postId: 123,
+    userId: 142,
+    createdAt: "123",
     title: null,
     content: "Hello",
     likeCount: 1,
+    viewCount: 3,
   },
   {
-    title: "What",
-    content: "Hello2",
-    likeCount: 3,
+    postId: 143,
+    userId: 14512,
+    createdAt: "1123",
+    title: null,
+    content: "Hell11o",
+    likeCount: 1,
+    viewCount: 3,
   },
 ]
 
 const postService = {
+  myPosts: async (): Promise<PostDto[]> => {
+    try {
+      const response = await postAxios.get('/my')
+
+      if (response.status !== 200) {
+        throw new Error()
+      }
+
+      return response.data
+
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // custom bad requests
+      }
+      throw new Error("Unexpected error during loading my posts")
+    }
+  },
+
+  readPost: async (postId: number): Promise<void> => {
+    try {
+      const response = await postAxios.post(`/view-history/${postId}`)
+
+      if (response.status !== 201) {
+        throw new Error()
+      }
+
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // custom bad requests
+      }
+      throw new Error("Unexpected error during adding view history")
+    }
+  },
+
   newPost: async (title: string, content: string): Promise<void> => {
     try {
       const response = await postAxios.post('/add', {title, content})
@@ -35,7 +77,7 @@ const postService = {
     }
   },
 
-  getRandomPosts: async (): Promise<PostCard[]> => {
+  getRandomPosts: async (): Promise<PostDto[]> => {
     try {
       const response = await postAxios.get('/random')
 
@@ -43,11 +85,7 @@ const postService = {
         throw new Error()
       }
 
-      return response.data.map((post: PostDto) => ({
-        title: post.title,
-        content: post.content,
-        likeCount: post.likeCount,
-      }))
+      return response.data
 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -62,7 +100,7 @@ const postService = {
   },
 
   // DELETE
-  testGetRandomPosts: async (): Promise<PostCard[]> => {
+  testGetRandomPosts: async (): Promise<PostDto[]> => {
     return testPosts
   }
 }

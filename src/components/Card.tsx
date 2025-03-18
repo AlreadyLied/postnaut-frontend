@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion'
+import { PostDto } from '@/types/post'
 
 interface CardProps {
-  title: string | null
-  content: string
-  likes: number
+  post: PostDto
   animationKey: number
   direction: number
 }
 
-const Card: React.FC<CardProps> = ({ title, content, animationKey, direction }) => {
+const Card: React.FC<CardProps> = ({ post, animationKey, direction }) => {
   return (
     <motion.div
       key={animationKey}
@@ -19,8 +18,8 @@ const Card: React.FC<CardProps> = ({ title, content, animationKey, direction }) 
       className="card bg-cardA w-[500px] shadow-xl rounded-lg"
     >
       <div className="card-body space-y-16 p-6">
-        <h2 className="card-title">{title}</h2>
-        <p className="text-lg">{content}</p>
+        <h2 className="card-title">{post.title}</h2>
+        <p className="text-lg">{post.content}</p>
         <div className="card-actions justify-end space-x-2">
           <input
             type="text"
