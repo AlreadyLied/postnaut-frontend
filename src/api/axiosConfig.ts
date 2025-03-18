@@ -3,10 +3,6 @@ import useUserStore from '@/stores/userStore'
 
 const API_BASE_URL = "http://localhost:8080"
 
-const getToken = () => {
-  return useUserStore.getState().user?.token ?? null
-}
-
 const createAxiosInstance = (basePath: string = "") => {
   const instance = axios.create({
     baseURL: `${API_BASE_URL}${basePath}`,
@@ -17,7 +13,7 @@ const createAxiosInstance = (basePath: string = "") => {
   })
 
   instance.interceptors.request.use((config) => {
-    const token = getToken()
+    const token = useUserStore.getState().user?.token
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
