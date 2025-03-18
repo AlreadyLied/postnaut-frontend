@@ -4,7 +4,7 @@ import { authAxios } from '@/api/axiosConfig'
 const authService = {
   login: async (email: string, password: string): Promise<string> => {
     try {
-      const response = await authAxios.post(`/auth/login`, {email, password})
+      const response = await authAxios.post(`/login`, {email, password})
 
       if (response.status !== 200) {
         throw new Error()
@@ -16,13 +16,13 @@ const authService = {
           throw new Error("Incorrect email or password")
         }
       }
-      throw new Error("Unexpected error during login")
+      throw new Error(`Unexpected error during login\n${error}`)
     }
   },
 
   register: async (email: string, password: string): Promise<void> => {
     try {
-      const response = await authAxios.post(`/auth/register`, {email, password})
+      const response = await authAxios.post(`/register`, {email, password})
 
       if (response.status !== 201) {
         throw new Error()
@@ -33,7 +33,7 @@ const authService = {
           throw new Error("The email already exists")
         }
       }
-      throw new Error("Unexpected error during register")
+      throw new Error(`Unexpected error during register\n${error}`)
     }
   },
 }
