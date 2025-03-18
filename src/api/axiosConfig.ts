@@ -1,12 +1,10 @@
 import axios from 'axios'
+import useUserStore from '@/stores/userStore'
 
 const API_BASE_URL = "http://localhost:8080"
 
 const getToken = () => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem("token")
-  }
-  return null
+  return useUserStore.getState().user?.token ?? null
 }
 
 const createAxiosInstance = (basePath: string = "") => {
