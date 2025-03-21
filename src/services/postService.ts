@@ -6,13 +6,8 @@ const postService = {
   myPosts: async (): Promise<PostDto[]> => {
     try {
       const response = await postAxios.get('/my')
-
-      if (response.status !== 200) {
-        throw new Error()
-      }
-
       return response.data
-
+      
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         // custom bad requests
@@ -23,11 +18,7 @@ const postService = {
 
   readPost: async (postId: number): Promise<void> => {
     try {
-      const response = await postAxios.post(`/view-history/${postId}`)
-
-      if (response.status !== 201) {
-        throw new Error()
-      }
+      await postAxios.post(`/view-history/${postId}`)
 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -39,11 +30,7 @@ const postService = {
 
   newPost: async (title: string, content: string): Promise<void> => {
     try {
-      const response = await postAxios.post('/add', {title, content})
-
-      if (response.status !== 201) {
-        throw new Error()
-      }
+      await postAxios.post('/add', {title, content})
 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -58,14 +45,9 @@ const postService = {
   getRandomPosts: async (): Promise<PostDto[]> => {
     try {
       const response = await postAxios.get('/random')
-
       if (response.status === 204) {
         return []
       }
-      if (response.status !== 200) {
-        throw new Error()
-      }
-
       return response.data
 
     } catch (error: unknown) {

@@ -5,11 +5,8 @@ const authService = {
   login: async (email: string, password: string): Promise<string> => {
     try {
       const response = await authAxios.post(`/login`, {email, password})
-
-      if (response.status !== 200) {
-        throw new Error()
-      }
       return response.data
+
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 401) {
@@ -22,11 +19,8 @@ const authService = {
 
   register: async (email: string, password: string): Promise<void> => {
     try {
-      const response = await authAxios.post(`/register`, {email, password})
-
-      if (response.status !== 201) {
-        throw new Error()
-      }
+      await authAxios.post(`/register`, {email, password})
+      
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 409) {

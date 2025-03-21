@@ -28,15 +28,19 @@ const MyPosts = () => {
         <p>Loading...</p>
       ) : (
         <div className="h-96 overflow-y-auto border rounded-lg p-2 space-y-3">
-          {posts.map((post) => (
-            <PostCard
-              title='null'
-              contents={post.content}
-              likeCount={post.likeCount}
-              viewCount={post.viewCount}
-              commentCount={0}
-            />
-          ))}
+          {posts.length === 0 ? (
+            <p className="text-center text-gray-500">No content</p>
+          ) : (
+            posts.map((post) => (
+              <PostCard
+                title='null'
+                contents={post.content}
+                likeCount={post.likeCount}
+                viewCount={post.viewCount}
+                commentCount={0}
+              />
+            ))
+          )}
         </div>
       )}
     </div>
