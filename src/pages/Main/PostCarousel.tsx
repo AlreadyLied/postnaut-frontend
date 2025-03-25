@@ -7,42 +7,76 @@ import { PostWithId } from '@/types/post'
 const PostCarousel = () => {
   const [posts, setPosts] = useState<PostWithId[]>([])
   const [index, setIndex] = useState(0)
+  const [isEmpty, setIsEmpty] = useState(true)
 
   useEffect(() => {
-    fetchPosts()
+    const initialPosts = async () => {
+      try {
+        const fetchedPosts = await postService.getRandomPosts()
+        
+        const postsForCard = fetchedPosts.map((post, idx) => ({
+          id: idx + 1,
+          ...post,
+        }))
+
+        if (postsForCard.length === 0) {
+          setIsEmpty(true)
+        } else {
+          setIsEmpty(false)
+          setPosts(postsForCard)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    initialPosts()
   }, [])
 
-  const fetchPosts = async () => {
+  const updatePosts = async () => {
     try {
       const fetchedPosts = await postService.getRandomPosts()
+
+      setIndex(0)
+      setPosts([])
       const postsForCard = fetchedPosts.map((post, idx) => ({
         id: idx + 1,
         ...post,
       }))
-      setPosts(postsForCard)
+      
+      if (postsForCard.length === 0) {
+        setIsEmpty(true)
+      } else {
+        setIsEmpty(false)
+        setPosts(postsForCard)
+      }
+
     } catch (error) {
-      // TODO no content
-      alert(error)
+      console.log(error)
     }
   }
 
-  const postRead = (postId: number) => {
-    postService.readPost(postId)
+  const postRead = async (postId: number) => {
+    await postService.readPost(postId)
   }
 
-  const nextPost = () => {
-    postRead(posts[index].postId)
-    if (index + 1 === posts.length) {
-      fetchPosts()
-      setIndex(0)
+  const nextPost = async () => {
+    await postRead(posts[index].postId)
+
+    const nextIndex = index + 1
+    if (nextIndex === posts.length) {
+      await updatePosts()
     }
     else {
-      setIndex((prev) => (prev + 1))
+      setIndex(nextIndex)
     }
   }
 
   return (
     <div className="relative w-full pt-12 overflow-hidden">
+      {isEmpty ?
+      <h2 className="text-lg text-center">No Contents</h2>
+      :
       <div className="flex flex-col items-center justify-center">
         <div className="relative w-120 h-80 flex items-center justify-center">
           <AnimatePresence mode="wait">
@@ -63,7 +97,7 @@ const PostCarousel = () => {
         >
           Next
         </button>
-      </div>
+      </div>}
     </div>
   )
 }
