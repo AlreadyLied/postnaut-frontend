@@ -7,24 +7,24 @@ import { PostWithId } from '@/types/post'
 const PostCarousel = () => {
   const [posts, setPosts] = useState<PostWithId[]>([])
   const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(1)
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const fetchedPosts = await postService.getRandomPosts()
-        const postsForCard = fetchedPosts.map((post, idx) => ({
-          id: idx + 1,
-          ...post,
-        }))
-        setPosts(postsForCard)
-      } catch (error) {
-        console.error("Error fetching posts", error)
-      }
-    }
-
     fetchPosts()
   }, [])
+
+  const fetchPosts = async () => {
+    try {
+      const fetchedPosts = await postService.getRandomPosts()
+      const postsForCard = fetchedPosts.map((post, idx) => ({
+        id: idx + 1,
+        ...post,
+      }))
+      setPosts(postsForCard)
+    } catch (error) {
+      // TODO no content
+      alert(error)
+    }
+  }
 
   const postRead = (postId: number) => {
     postService.readPost(postId)
@@ -32,8 +32,13 @@ const PostCarousel = () => {
 
   const nextPost = () => {
     postRead(posts[index].postId)
-    setDirection(1)
-    setIndex((prev) => (prev + 1) % posts.length)
+    if (index + 1 === posts.length) {
+      fetchPosts()
+      setIndex(0)
+    }
+    else {
+      setIndex((prev) => (prev + 1))
+    }
   }
 
   return (
@@ -46,7 +51,7 @@ const PostCarousel = () => {
               key={posts[index].id}
               post={posts[index]}
               animationKey={posts[index].id}
-              direction={direction}
+              direction={1}
               />
             )}
           </AnimatePresence>

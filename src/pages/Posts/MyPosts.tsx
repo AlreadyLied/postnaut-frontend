@@ -22,12 +22,11 @@ const MyPosts = () => {
   }, [])
 
   return (
-    <div className="w-1/2 mx-auto p-4">
-      <h1 className="text-2xl font-bold mx-2 mb-4">My Posts</h1>
+    <div className="w-3/4 mx-auto p-4">
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="h-96 overflow-y-auto p-2 space-y-3">
+        <div className="h-3/4 overflow-y-auto p-2 space-y-3">
           {posts.length === 0 ? (
             <p className="text-center text-gray-500">No content</p>
           ) : (
