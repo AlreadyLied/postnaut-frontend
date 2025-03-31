@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react'
 import postService from '@/services/postService'
 import Card from '@/components/Card'
 import { PostWithId } from '@/types/post'
+import useUserStore from '@/stores/userStore'
 
 const PostCarousel = () => {
   const [posts, setPosts] = useState<PostWithId[]>([])
   const [index, setIndex] = useState(0)
   const [isEmpty, setIsEmpty] = useState(true)
+  const {isLoggedIn} = useUserStore()
 
   useEffect(() => {
     const initialPosts = async () => {
@@ -61,7 +63,9 @@ const PostCarousel = () => {
   }
 
   const nextPost = async () => {
-    await postRead(posts[index].postId)
+    if (isLoggedIn) {
+      await postRead(posts[index].postId)
+    }
 
     const nextIndex = index + 1
     if (nextIndex === posts.length) {

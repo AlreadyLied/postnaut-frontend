@@ -1,13 +1,12 @@
 import useNavigation from '@/hooks/useNavigation'
+import LogoImage from '@/assets/LogoImage.svg'
 
 const LogoButton = () => {
   const { goToMain } = useNavigation()
 
   return (
-    <button onClick={goToMain}>
-      <p className="w-20 h-20 p-2">
-        LOGO
-      </p>
+    <button onClick={goToMain} className="p2">
+      <img src={LogoImage} className="w-20 h-20" />
     </button>
   )
 }
