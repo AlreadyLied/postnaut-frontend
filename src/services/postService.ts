@@ -1,8 +1,34 @@
 import axios from 'axios'
 import { postAxios } from '@/api/axiosConfig'
 import { PostDto } from '@/types/post'
+import { ReplyDto } from '@/types/reply'
 
 const postService = {
+  addReply: async (postId: number, content: string): Promise<void> => {
+    try {
+      await postAxios.post(`/${postId}/replies`, {content})
+
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // custom bad requests
+      }
+      throw new Error("Unexpected error during adding reply")
+    }
+  },
+
+  myReplies: async (postId: number): Promise<ReplyDto[]> => {
+    try {
+      const response = await postAxios.get(`/${postId}/replies`)
+      return response.data
+
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // custom bad requests
+      }
+      throw new Error("Unexpected error during loading replies")
+    }
+  },
+
   myPosts: async (): Promise<PostDto[]> => {
     try {
       const response = await postAxios.get('/my')
