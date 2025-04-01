@@ -54,9 +54,9 @@ const postService = {
     }
   },
 
-  newPost: async (title: string, content: string): Promise<void> => {
+  newPost: async (title: string, content: string, activeDuration: string): Promise<void> => {
     try {
-      await postAxios.post('/add', {title, content})
+      await postAxios.post('/add', {title, content, activeDuration})
 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
