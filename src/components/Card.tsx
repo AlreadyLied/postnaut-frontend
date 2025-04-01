@@ -1,13 +1,17 @@
 import { motion } from 'framer-motion'
 import { PostDto } from '@/types/post'
+import { useState } from 'react'
 
 interface CardProps {
   post: PostDto
   animationKey: number
   direction: number
+  onClick: (comment: string) => void
 }
 
-const Card: React.FC<CardProps> = ({ post, animationKey, direction }) => {
+const Card: React.FC<CardProps> = ({ post, animationKey, direction, onClick }) => {
+  const [comment, setComment] = useState("")
+  
   return (
     <motion.div
       key={animationKey}
@@ -25,8 +29,10 @@ const Card: React.FC<CardProps> = ({ post, animationKey, direction }) => {
             type="text"
             placeholder=" Leave a comment "
             className="input input-bordered w-2/3"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           />
-          <button className="btn btn-primary">Submit</button>
+          <button className="btn btn-primary" onClick={() => onClick(comment)}>Submit</button>
         </div>
       </div>
     </motion.div>

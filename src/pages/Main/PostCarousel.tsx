@@ -76,6 +76,11 @@ const PostCarousel = () => {
     }
   }
 
+  const handleSubmit = async (postId: number, comment: string) => {
+    if (comment.trim() === "") return
+    await postService.addReply(postId, comment)
+  }
+
   return (
     <div className="relative w-full pt-12 overflow-hidden">
       {isEmpty ?
@@ -90,6 +95,7 @@ const PostCarousel = () => {
               post={posts[index]}
               animationKey={posts[index].id}
               direction={1}
+              onClick={(comment) => handleSubmit(posts[index].postId, comment)}
               />
             )}
           </AnimatePresence>
