@@ -13,6 +13,7 @@ const useNavigation = () => {
     goToPosts: () => navigate('/posts'),
     goToArchive: () => navigate('/archive'),
     goToComments: () => navigate('/comments'),
+    goToReplies: () => navigate('/replies'),
     currentPath: location.pathname,
   }
 }

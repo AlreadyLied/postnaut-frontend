@@ -2,10 +2,14 @@ import { useState, useEffect } from 'react'
 import postService from '@/services/postService'
 import { PostDto } from '@/types/post'
 import PostCard from '@/pages/Posts/PostCard'
+import usePostStore from '@/stores/postStore'
+import useNavigation from '@/hooks/useNavigation'
 
 const MyPosts = () => {
   const [posts, setPosts] = useState<PostDto[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+  const { setCurrentPost } = usePostStore()
+  const { goToReplies } = useNavigation()
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,6 +25,11 @@ const MyPosts = () => {
     fetchPosts()
   }, [])
 
+  const buttonClicked = (postId: number) => {
+    setCurrentPost(postId)
+    goToReplies()
+  }
+
   return (
     <div className="w-3/4 mx-auto p-4">
       {loading ? (
@@ -32,11 +41,13 @@ const MyPosts = () => {
           ) : (
             posts.map((post) => (
               <PostCard
+                key={post.postId}
                 title={post.title ?? "Untitled"}
                 contents={post.content}
                 likeCount={post.likeCount}
                 viewCount={post.viewCount}
                 commentCount={0}
+                onClick={() => buttonClicked(post.postId)}
               />
             ))
           )}

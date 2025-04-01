@@ -9,6 +9,7 @@ import StatsPage from '@/pages/Stats'
 import PostsPage from '@/pages/Posts'
 import ArchivePage from '@/pages/Archive'
 import CommentsPage from '@/pages/Comments'
+import RepliesPage from '@/pages/Replies'
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: 'comments',
         element: <CommentsPage />,
+      },
+      {
+        path: 'replies',
+        element: <RepliesPage />,
       },
     ],
   },

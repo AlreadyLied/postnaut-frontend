@@ -7,11 +7,12 @@ interface PostCardProps {
   viewCount: number
   likeCount: number
   commentCount: number
+  onClick: () => void
 }
 
-const PostCard: FC<PostCardProps> = ({ title, contents, viewCount, likeCount, commentCount }) => {
+const PostCard: FC<PostCardProps> = ({ title, contents, viewCount, likeCount, commentCount, onClick }) => {
   return (
-    <button className="p-4 bg-white rounded-lg shadow-md w-full">
+    <button className="p-4 bg-white rounded-lg shadow-md w-full" onClick={onClick}>
       <h2 className="text-lg font-semibold truncate mb-2">{title}</h2>
       <p className="text-gray-600 text-left line-clamp-2">{contents}</p>
       <div className="mt-8 gap-x-8 flex text-sm text-gray-500">
