@@ -2,14 +2,14 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 interface PostStore {
-  currentPostId: number | null,
+  currentPostId: number,
   setCurrentPost: (postId: number) => void,
 }
 
 const usePostStore = create<PostStore>()(
   persist(
     (set) => ({
-      currentPostId: null,
+      currentPostId: 0,
       setCurrentPost: (postId) => set({currentPostId: postId}),
     }),
     {

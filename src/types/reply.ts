@@ -1,9 +1,8 @@
 export interface ReplyDto {
-  postId: number,
+  replyId: number,
   userId: number,
-  createdAt: string,
-  title: string | null,
+  postId: number,
   content: string,
-  likeCount: number,
-  viewCount: number,
+  liked: boolean,
+  createdAt: string,
 }

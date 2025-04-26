@@ -53,7 +53,7 @@ const postService = {
     }
   },
 
-  myReplies: async (postId: number): Promise<ReplyDto[]> => {
+  postReplies: async (postId: number): Promise<ReplyDto[]> => {
     try {
       const response = await postAxios.get(`/${postId}/replies`)
       return response.data
