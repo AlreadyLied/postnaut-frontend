@@ -5,6 +5,18 @@ import { ReplyDto } from '@/types/reply'
 
 const postService = {
 
+  likePost: async (postId: number): Promise<void> => {
+    try {
+      await postAxios.post(`/${postId}/unhide`)
+
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // custom bad requests
+      }
+      throw new Error("Unexpected error during liking a post")
+    }
+  },
+
   unhidePost: async (postId: number): Promise<void> => {
     try {
       await postAxios.post(`/${postId}/unhide`)
