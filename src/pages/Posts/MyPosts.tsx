@@ -42,6 +42,7 @@ const MyPosts = () => {
             posts.map((post) => (
               <PostCard
                 key={post.postId}
+                postId ={post.postId}
                 title={post.title ?? "Untitled"}
                 contents={post.content}
                 likeCount={post.likeCount}
