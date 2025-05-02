@@ -81,7 +81,7 @@ const postService = {
 
   readPost: async (postId: number): Promise<void> => {
     try {
-      await postAxios.post(`/view-history/${postId}`)
+      await postAxios.post(`${postId}/view-history`)
 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -105,12 +105,9 @@ const postService = {
     }
   },
 
-  getRandomPosts: async (): Promise<PostDto[]> => {
+  getRandomPost: async (): Promise<PostDto> => {
     try {
       const response = await postAxios.get('/random')
-      if (response.status === 204) {
-        return []
-      }
       return response.data
 
     } catch (error: unknown) {

@@ -1,16 +1,13 @@
-import { motion } from 'framer-motion'
 import { PostDto } from '@/types/post'
 import { useState } from 'react'
 import postAxios from '@/services/postService'
 
 interface CardProps {
   post: PostDto
-  animationKey: number
-  direction: number
   onClick: (comment: string) => void
 }
 
-const Card: React.FC<CardProps> = ({ post, animationKey, direction, onClick }) => {
+const PostIt: React.FC<CardProps> = ({ post, onClick }) => {
   const [comment, setComment] = useState("")
   const [liked, setLiked] = useState(false)
 
@@ -27,14 +24,7 @@ const Card: React.FC<CardProps> = ({ post, animationKey, direction, onClick }) =
   }
   
   return (
-    <motion.div
-      key={animationKey}
-      initial={{ x: direction === 1 ? "100%" : "-100%", opacity: 0 }}
-      animate={{ x: "0%", opacity: 1 }}
-      exit={{ x: direction === 1 ? "-100%" : "100%", opacity: 0 }}
-      transition={{ type: "tween", duration: 0.5 }}
-      className="card bg-cardA w-[500px] shadow-xl rounded-lg"
-    >
+    <div>
       <div className="card-body space-y-16 p-6">
         <div className="flex justify-between items-center">
           <h2 className="card-title">{post.title}</h2>
@@ -58,8 +48,8 @@ const Card: React.FC<CardProps> = ({ post, animationKey, direction, onClick }) =
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
-export default Card
+export default PostIt

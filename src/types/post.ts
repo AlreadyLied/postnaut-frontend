@@ -7,7 +7,3 @@ export interface PostDto {
   likeCount: number
   viewCount: number
 }
-
-export interface PostWithId extends PostDto {
-  id: number
-}
