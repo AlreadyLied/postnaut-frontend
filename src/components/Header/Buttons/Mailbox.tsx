@@ -1,19 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Mail } from 'lucide-react'
-
-const alarms = [
-  { id: 1, message: "You have a new follower" },
-  { id: 2, message: "Someone commented on your post" },
-  { id: 3, message: "Hello 1" },
-  { id: 4, message: "Hello 1" },
-  { id: 5, message: "Hello 1" },
-  { id: 6, message: "Hello 1" },
-]
+import { NoticeDto } from '@/types/notice'
+import noticeService from '@/services/noticeService'
 
 const Mailbox = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [notices, setNotices] = useState<NoticeDto[]>([])
 
   const toggleDropdown = () => setIsOpen(!isOpen)
+
+  useEffect(() => {
+    const fetchNotices = async () => {
+      try {
+        const fetchedNotices = await noticeService.getNotice()
+        setNotices(fetchedNotices)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
+    fetchNotices()
+  }, [])
   
   return (
     <div className="flex flex-col relative w-16 items-center">
@@ -24,12 +31,13 @@ const Mailbox = () => {
       {isOpen && (
         <div className="absolute right-0 mt-8 w-48 bg-white shadow-lg rounded-lg border">
           <ul className="p-2">
-            {alarms.length === 0 ? (
+            {notices.length === 0 ? (
               <li className="text-gray-500">No alarms</li>
             ) : (
-              alarms.map((alarm) => (
-                <li key={alarm.id} className="border-b py-1 text-sm">
-                  {alarm.message}
+              notices.map((notice) => (
+                <li key={notice.notificationId} className="border-b py-1 text-sm">
+                  {/*notice.message*/}
+                  Reply!
                 </li>
               ))
             )}

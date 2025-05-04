@@ -3,7 +3,7 @@ import { NoticeDto } from '@/types/notice'
 import { isAxiosError } from 'axios'
 
 const noticeService = {
-  getNotice: async (): Promise<NoticeDto> => {
+  getNotice: async (): Promise<NoticeDto[]> => {
     try {
       const data = await noticeAxios.get("")
       return data.data
