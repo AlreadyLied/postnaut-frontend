@@ -25,5 +25,6 @@ const createAxiosInstance = (basePath: string = "") => {
 
 export const authAxios = createAxiosInstance("/auth")
 export const postAxios = createAxiosInstance("/posts")
+export const noticeAxios = createAxiosInstance("/notifications")
 
 export default createAxiosInstance()
