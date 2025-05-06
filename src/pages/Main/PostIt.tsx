@@ -1,5 +1,5 @@
 import { PostDto } from '@/types/post'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import postAxios from '@/services/postService'
 
 interface CardProps {
@@ -10,6 +10,10 @@ interface CardProps {
 const PostIt: React.FC<CardProps> = ({ post, onClick }) => {
   const [comment, setComment] = useState("")
   const [liked, setLiked] = useState(false)
+
+  useEffect(() => {
+    setLiked(false) // Reset liked state when post changes
+  }, [post.postId])
 
   const handleLike = async () => {
     if (!liked) {
