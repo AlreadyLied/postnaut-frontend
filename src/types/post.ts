@@ -1,9 +1,12 @@
 export interface PostDto {
   postId: number
   userId: number
-  createdAt: string
   title: string | null
   content: string
-  likeCount: number
   viewCount: number
+  likeCount: number
+  createdAt: string
+  expiresAt: string
+  isHidden: boolean
+  isExpired: boolean
 }

@@ -25,7 +25,6 @@ const PostIt: React.FC<CardProps> = ({ post, onClick }) => {
   return (
     <div className="card bg-cardA shadow-md">
       <div className="card-body space-y-4 p-6">
-        {/* 타이틀과 좋아요 버튼 */}
         <div className="flex justify-between items-center">
           <h2 className="card-title text-xl font-bold">{post.title}</h2>
           <button
@@ -37,10 +36,8 @@ const PostIt: React.FC<CardProps> = ({ post, onClick }) => {
           </button>
         </div>
 
-        {/* 콘텐츠 */}
         <p className="text-base text-gray-700">{post.content}</p>
 
-        {/* 댓글 입력창 */}
         <div className="flex space-x-2">
           <input
             type="text"

@@ -9,11 +9,12 @@ interface PostCardProps {
   viewCount: number
   likeCount: number
   commentCount: number
+  isHidden: boolean
   onClick: () => void
 }
 
-const PostCard: FC<PostCardProps> = ({ postId, title, contents, viewCount, likeCount, commentCount, onClick }) => {
-  const [postActive, setPostActive] = useState(true)
+const PostCard: FC<PostCardProps> = ({ postId, title, contents, viewCount, likeCount, commentCount, isHidden, onClick }) => {
+  const [postActive, setPostActive] = useState(!isHidden)
 
   const handleCardClick = () => {
     onClick?.()

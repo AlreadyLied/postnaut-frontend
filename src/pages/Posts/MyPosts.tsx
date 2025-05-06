@@ -48,6 +48,7 @@ const MyPosts = () => {
                 likeCount={post.likeCount}
                 viewCount={post.viewCount}
                 commentCount={0}
+                isHidden={post.isHidden}
                 onClick={() => buttonClicked(post.postId)}
               />
             ))
